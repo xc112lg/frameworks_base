@@ -14,7 +14,7 @@
 
     <!-- Max visible notification icons -->
     <integer name="config_maxVisibleNotificationIcons">4</integer>
-    <integer name="config_maxVisibleNotificationIconsOnLock">5</integer>
+    <integer name="config_maxVisibleNotificationIconsOnLock">3</integer>
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
@@ -117,4 +117,7 @@
 
     <!-- Whether to find optimal display refresh rate when using udfps -->
     <bool name="config_udfpsOptimalRefreshRate">true</bool>
+
+    <!-- Max visible status icons -->
+    <integer name="config_maxVisibleStatusIcons">7</integer>
 </resources>
