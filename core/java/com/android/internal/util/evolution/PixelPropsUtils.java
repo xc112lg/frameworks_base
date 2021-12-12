@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2020 The Pixel Experience Project
  *               2021-2022 crDroid Android Project
- *               2019-2022 The Evolution X Project
+ *               2019-2022 Evolution X
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
  */
 package com.android.internal.util.evolution;
 
+import android.app.Application;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
@@ -151,6 +152,7 @@ public class PixelPropsUtils {
     static {
         propsToKeep = new HashMap<>();
         propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<>(Collections.singletonList("FINGERPRINT")));
+        propsToKeep.put("com.google.android.gms", new ArrayList<String>(Arrays.asList("MODEL")));
         propsToChangePixel6 = new HashMap<>();
         propsToChangePixel6.put("BRAND", "google");
         propsToChangePixel6.put("MANUFACTURER", "Google");
@@ -182,11 +184,14 @@ public class PixelPropsUtils {
         propsToChangeOP8P.put("MANUFACTURER", "OnePlus");
     }
 
-    public static void setProps(String packageName) {
+    public static void setProps(Application app) {
+        String packageName = app.getPackageName();
         if (packageName == null) {
             return;
         }
-        if (packageName.equals(PACKAGE_GMS)) {
+        if (packageName.equals(PACKAGE_GMS) &&
+                    app.getProcessName().equals("com.google.android.gms.unstable")) {
+            setPropValue("MODEL", "Pixel 5" + " ");
             sIsGms = true;
         }
         boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
