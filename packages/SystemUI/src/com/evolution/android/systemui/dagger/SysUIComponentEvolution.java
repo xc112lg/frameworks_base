@@ -7,6 +7,7 @@ import com.android.systemui.dagger.SystemUIBinder;
 import com.android.systemui.dagger.SysUIComponent;
 import com.android.systemui.dagger.SystemUIModule;
 
+import com.evolution.android.systemui.gamedashboard.GameDashboardModule;
 import com.evolution.android.systemui.keyguard.EvolutionKeyguardSliceProvider;
 import com.evolution.android.systemui.smartspace.KeyguardSmartspaceController;
 
@@ -16,9 +17,10 @@ import dagger.Subcomponent;
 @Subcomponent(modules = {
         DefaultComponentBinder.class,
         DependencyProvider.class,
-        SystemUIBinder.class,
+        GameDashboardModule.class,
         SystemUIModule.class,
-        SystemUIEvolutionModule.class })
+        SystemUIEvolutionBinder.class,
+        SystemUIEvolutionModule.class})
 public interface SysUIComponentEvolution extends SysUIComponent {
     @SysUISingleton
     @Subcomponent.Builder

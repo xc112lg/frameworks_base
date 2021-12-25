@@ -81,11 +81,12 @@ android_library {
         },
     },
     resource_dirs: [
-        "res-product",
-        "res-keyguard",
-        "res-smartspace",
         "res",
+        "res-gamedashboard",
         "res-hwkeys",
+        "res-keyguard",
+        "res-product",
+        "res-smartspace",
     ],
     static_libs: [
         "WindowManager-Shell",
@@ -126,6 +127,7 @@ android_library {
         "colorkt",
         "themelib",
         "backgesture-google",
+        "gamedashboard-sysui-google",
         "smartspace-google",
         "tensorflowlite_java",
     ],
