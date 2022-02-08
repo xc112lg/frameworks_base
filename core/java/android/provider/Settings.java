@@ -4904,27 +4904,6 @@ public final class Settings {
         public static final String TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK = "touchscreen_gesture_haptic_feedback";
 
         /**
-         * AlertSlider mode when alertslider is at the bottom.
-         * @hide
-         */
-        @SuppressLint("NoSettingsProvider")
-        public static final String ALERTSLIDER_MODE_POSITION_BOTTOM = "alertslider_mode_position_bottom";
-
-        /**
-         * AlertSlider mode when alertslider is at the middle.
-         * @hide
-         */
-        @SuppressLint("NoSettingsProvider")
-        public static final String ALERTSLIDER_MODE_POSITION_MIDDLE = "alertslider_mode_position_middle";
-
-        /**
-         * AlertSlider mode when alertslider is at the top.
-         * @hide
-         */
-        @SuppressLint("NoSettingsProvider")
-        public static final String ALERTSLIDER_MODE_POSITION_TOP = "alertslider_mode_position_top";
-
-        /**
          * Control whether the accelerometer will be used to change screen
          * orientation.  If 0, it will not be used unless explicitly requested
          * by the application; if 1, it will be used by default unless explicitly
@@ -6135,12 +6114,12 @@ public final class Settings {
         public static final String ON_THE_GO_CAMERA = "on_the_go_camera";
 
         /**
-         * Enable fod detection even when screen is off
+         * Enable UDFPS detection even when screen is off
          * Default value is 0
          * @hide
          */
         @Readable
-        public static final String SCREEN_OFF_FOD = "screen_off_fod";
+        public static final String UDFPS_SCREEN_OFF = "udfps_screen_off";
 
         /**
          * Whether to pulse ambient on new music tracks
@@ -6165,16 +6144,10 @@ public final class Settings {
         public static final String UDFPS_HAPTIC_FEEDBACK = "udfps_haptic_feedback";
 
         /**
-         * FOD pressed color
+         * Whether to disable Night Light feature during UDFPS unlock
          * @hide
          */
-        public static final String FOD_COLOR = "fod_color";
-
-        /**
-         * FOD night light
-         * @hide
-         */
-        public static final String FOD_NIGHT_LIGHT = "fod_night_light";
+        public static final String UDFPS_NIGHT_LIGHT = "udfps_night_light";
 
         /**
          * Gestures nav: left long back swipe action
@@ -6322,13 +6295,6 @@ public final class Settings {
         public static final String QS_SHOW_AUTO_BRIGHTNESS_BUTTON = "qs_show_auto_brightness_button";
 
         /**
-         * Setting to hold the current set overlay for color bucket.
-         * overlay package name (String)
-         * @hide
-         */
-        public static final String COLOR_BUCKET_OVERLAY = "color_bucket_overlay";
-
-        /**
          * Adaptive playback
          * Automatically pause media when the volume is muted and
          * will resume automatically when volume is restored.
@@ -6379,12 +6345,6 @@ public final class Settings {
          * @hide
          */
         public static final String UDFPS_ICON = "udfps_icon";
-
-        /**
-         * Volume panel on left
-         * @hide
-         */
-        public static final String VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
 
         /**
          * Whether or not gaming mode is enabled.
@@ -6623,10 +6583,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL_IGNORE_DND);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL_RATE);
-            PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_BOTTOM);
-            PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_MIDDLE);
-            PRIVATE_SETTINGS.add(ALERTSLIDER_MODE_POSITION_TOP);
-            PRIVATE_SETTINGS.add(COLOR_BUCKET_OVERLAY);
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
         }
 
@@ -11585,6 +11541,12 @@ public final class Settings {
         public static final String PULSE_SMOOTHING_ENABLED = "pulse_smoothing_enabled";
 
         /**
+         * Control whether the process CPU info meter should be shown.
+         * @hide
+         */
+        public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -16468,10 +16430,6 @@ public final class Settings {
         @Readable
         public static final String MAX_SOUND_TRIGGER_DETECTION_SERVICE_OPS_PER_DAY =
                 "max_sound_trigger_detection_service_ops_per_day";
-        /**
-         * @hide
-         */
-        public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
 
         /**
          * Indicates whether aware is available in the current location.

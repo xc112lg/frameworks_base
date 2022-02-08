@@ -51,11 +51,6 @@
 
     <!-- SystemUI Tuner -->
     <string name="statusbar_items_title">Statusbar icon</string>
-    <string name="lockscreen_default">Default</string>
-    <string name="lockscreen_hidden">None</string>
-
-    <!-- Shows when people have clicked on the custom lockscreen shortcut [CHAR LIMIT=60] -->
-    <string name="custom_hint">Swipe from icon to launch</string>
 
     <!-- Advanced Reboot -->
     <string name="global_action_restart_advanced">Advanced</string>
@@ -81,12 +76,8 @@
     <!-- Running service button -->
     <string name="accessibility_quick_settings_running_services">Open Running Services screen.</string>
 
-    <!-- CPUInfo tile -->
+    <!-- CPU Info tile -->
     <string name="quick_settings_cpuinfo_label">CPU Info</string>
-    <string name="accessibility_quick_settings_cpuinfo_off">CPU Info off</string>
-    <string name="accessibility_quick_settings_cpuinfo_on">CPU Info on</string>
-    <string name="accessibility_quick_settings_cpuinfo_changed_off">CPU Info turned off</string>
-    <string name="accessibility_quick_settings_cpuinfo_changed_on">CPU Info turned on</string>
 
     <!-- Poweroff/Reboot/Recovery QS tile -->
     <string name="quick_settings_poweroff_label">Power off</string>
@@ -165,10 +156,6 @@
 
     <string name="task_helper_app_killed">%1$s force stopped</string>
     <string name="empty_app_killed">App</string>
-
-    <!-- AlertSlider -->
-    <string name="alert_slider_mode_priority_text">Priority</string>
-    <string name="alert_slider_mode_dnd_text">DND</string>
 
     <!-- On The Go -->
     <string name="onthego_notif_ticker">On-The-Go activated</string>

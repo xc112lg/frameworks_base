@@ -49,7 +49,7 @@
     <java-symbol type="array" name="custom_config_globalActionsList" />
 
     <!-- Whether device supports an alt. ambient display -->
-    <java-symbol type="bool" name="config_alt_ambient_display"/>
+    <java-symbol type="bool" name="config_supportsAltAmbientDisplay"/>
 
     <!-- HW keys binding -->
     <java-symbol type="anim" name="custom_app_in" />
@@ -98,13 +98,6 @@
     <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
     <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
-    <!-- AlertSlider modes -->
-    <java-symbol type="string" name="alert_slider_mode_normal" />
-    <java-symbol type="string" name="alert_slider_mode_priority" />
-    <java-symbol type="string" name="alert_slider_mode_vibrate" />
-    <java-symbol type="string" name="alert_slider_mode_silent" />
-    <java-symbol type="string" name="alert_slider_mode_dnd" />
-
     <!-- App error dialog -->
     <java-symbol type="id" name="aerr_copy" />
     <java-symbol type="string" name="url_copy_success" />
@@ -113,14 +106,8 @@
     <!-- Switch USB controller on Asus ROG devices-->
     <java-symbol type="bool" name="config_switchUsbController" />
 
-    <!-- Default FOD pressed icon -->
-    <java-symbol type="integer" name="config_fod_pressed_color" />
-
-    <!-- Whether device has hardware alertslider -->
-    <java-symbol type="bool" name="config_hasAlertSlider" />
-
-    <!-- NightLight FOD -->
-    <java-symbol type="bool" name="disable_fod_night_light"/>
+    <!-- Whether to disable Night Light feature during UDFPS unlock -->
+    <java-symbol type="bool" name="config_udfpsDisableNightLight"/>
 
     <!-- Whether to force enable multi resolution configuration for camera -->
     <java-symbol type="bool" name="config_forceMultiResolution" />
@@ -134,5 +121,8 @@
 
     <!-- Whether device supports gaming mode profiles -->
     <java-symbol type="bool" name="config_gamingmode_performance" />
+
+    <!-- Whether to cancel fingerprint operation if not idle -->
+    <java-symbol type="bool" name="config_fpCancelIfNotIdle" />
 
 </resources>

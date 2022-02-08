@@ -28,11 +28,6 @@
 
     <!-- The list of components which should be automatically disabled for all devices. -->
     <string-array name="config_globallyDisabledComponents" translatable="false">
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryContentProvider</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.history.HistoryActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSettingsActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicNotificationsSettingsActivity</item>
-        <item>com.google.android.as/com.google.intelligence.sense.ambientmusic.AmbientMusicSetupWizardActivity</item>
     </string-array>
 
     <!-- The list of components which should be forced to be enabled. -->
@@ -71,7 +66,7 @@
     </string-array>
 
     <!-- Whether device supports an alt. ambient display -->
-    <bool name="config_alt_ambient_display">false</bool>
+    <bool name="config_supportsAltAmbientDisplay">false</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -130,14 +125,8 @@
     <!-- Switch USB controller on Asus ROG devices-->
     <bool name="config_switchUsbController">false</bool>
 
-    <!-- Default FOD pressed color -->
-    <integer name="config_fod_pressed_color">0</integer>
-
-    <!-- Whether device has hardware alertslider -->
-    <bool name="config_hasAlertSlider">false</bool>
-
-    <!-- NightLight FOD -->
-    <bool name="disable_fod_night_light">false</bool>
+    <!-- Whether to disable Night Light feature during UDFPS unlock -->
+    <bool name="config_udfpsDisableNightLight">false</bool>
 
     <!-- Whether to force enable multi resolution configuration for camera -->
     <bool name="config_forceMultiResolution">false</bool>
@@ -153,5 +142,8 @@
 
     <!-- Whether device supports gaming mode profiles -->
     <bool name="config_gamingmode_performance">false</bool>
+
+    <!-- Whether to cancel fingerprint operation if not idle -->
+    <bool name="config_fpCancelIfNotIdle">false</bool>
 
 </resources>

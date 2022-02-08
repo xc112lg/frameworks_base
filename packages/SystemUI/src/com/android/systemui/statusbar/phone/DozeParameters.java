@@ -321,5 +321,4 @@ public class DozeParameters implements TunerService.Tunable,
          */
         void onAlwaysOnChange();
     }
-
 }
