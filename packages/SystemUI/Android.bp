@@ -131,6 +131,7 @@ android_library {
         "assistmanager-google",
         "backgesture-google",
         "columbus-sysui-google",
+        "elmyra-sysui-google",
         "gamedashboard-sysui-google",
         "smartspace-google",
         "tensorflowlite_java",

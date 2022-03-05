@@ -138,6 +138,7 @@ import com.google.android.systemui.assist.uihints.input.NgaInputHandler;
 import com.google.android.systemui.assist.uihints.input.TouchActionRegion;
 import com.google.android.systemui.assist.uihints.input.TouchInsideRegion;
 import com.google.android.systemui.columbus.ColumbusServiceWrapper;
+import com.google.android.systemui.elmyra.ServiceConfigurationGoogle;
 import com.google.android.systemui.smartspace.BcSmartspaceDataProvider;
 import com.google.android.systemui.smartspace.KeyguardMediaViewController;
 import com.google.android.systemui.smartspace.KeyguardZenAlarmViewController;
@@ -292,8 +293,8 @@ public abstract class SystemUIEvolutionModule {
 
     @Provides
     @SysUISingleton
-    static EvolutionServices provideEvolutionServices(Context context, UiEventLogger uiEventLogger, Lazy<ColumbusServiceWrapper> lazyB) {
-        return new EvolutionServices(context, uiEventLogger, lazyB);
+    static EvolutionServices provideEvolutionServices(Context context, UiEventLogger uiEventLogger, Lazy<ServiceConfigurationGoogle> lazy, Lazy<ColumbusServiceWrapper> lazyB) {
+        return new EvolutionServices(context, uiEventLogger, lazy, lazyB);
     }
 
     // Google
