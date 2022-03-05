@@ -25,6 +25,7 @@ import com.android.systemui.SystemUI;
 import com.android.systemui.accessibility.SystemActions;
 import com.android.systemui.accessibility.WindowMagnification;
 import com.android.systemui.biometrics.AuthController;
+import com.android.systemui.dagger.SystemUIBinder;
 import com.android.systemui.globalactions.GlobalActionsComponent;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.dagger.KeyguardModule;
@@ -46,8 +47,10 @@ import com.android.systemui.volume.VolumeUI;
 import com.android.systemui.wmshell.WMShell;
 import com.android.systemui.dagger.SysUISingleton;
 
+import com.evolution.android.systemui.EvolutionServices;
 import com.evolution.android.systemui.theme.ThemeOverlayControllerEvolution;
 
+import com.google.android.systemui.columbus.ColumbusTargetRequestService;
 import com.google.android.systemui.gamedashboard.GameMenuActivity;
 
 import dagger.Binds;
@@ -64,6 +67,22 @@ public abstract class SystemUIEvolutionBinder {
     @IntoMap
     @ClassKey(AuthController.class)
     public abstract SystemUI bindAuthController(AuthController service);
+
+    /**
+     * Inject into EvolutionServices.
+     */
+    @Binds
+    @IntoMap
+    @ClassKey(EvolutionServices.class)
+    public abstract SystemUI bindEvolutionServices(EvolutionServices sysui);
+
+    /**
+     * Inject into ColumbusTargetRequestService.
+     */
+    @Binds
+    @IntoMap
+    @ClassKey(ColumbusTargetRequestService.class)
+    public abstract Service bindColumbusTargetRequestService(ColumbusTargetRequestService activity);
 
     /**
      * Inject into GarbageMonitor.Service.

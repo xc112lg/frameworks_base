@@ -62,5 +62,6 @@
 -keep class com.evolution.** { *; }
 
 # Google rules
+-keep class android.hardware.** { *; }
 -keep class com.google.** { *; }
 -keep class vendor.** { *; }

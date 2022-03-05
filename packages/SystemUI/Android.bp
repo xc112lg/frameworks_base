@@ -82,6 +82,8 @@ android_library {
     },
     resource_dirs: [
         "res",
+        "res-assist",
+        "res-columbus",
         "res-gamedashboard",
         "res-hwkeys",
         "res-keyguard",
@@ -126,10 +128,13 @@ android_library {
         "faceunlock_framework",
         "colorkt",
         "themelib",
+        "assistmanager-google",
         "backgesture-google",
+        "columbus-sysui-google",
         "gamedashboard-sysui-google",
         "smartspace-google",
         "tensorflowlite_java",
+        "vendor-pixelatoms-java",
     ],
     manifest: "AndroidManifest.xml",
 
