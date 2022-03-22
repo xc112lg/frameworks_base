@@ -85,6 +85,7 @@ android_library {
         "res-ambientmusic",
         "res-assist",
         "res-columbus",
+        "res-elmyra",
         "res-gamedashboard",
         "res-hwkeys",
         "res-keyguard",
