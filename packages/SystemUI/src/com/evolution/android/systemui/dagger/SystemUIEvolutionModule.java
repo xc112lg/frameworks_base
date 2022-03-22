@@ -293,8 +293,8 @@ public abstract class SystemUIEvolutionModule {
 
     @Provides
     @SysUISingleton
-    static EvolutionServices provideEvolutionServices(Context context, UiEventLogger uiEventLogger, Lazy<ServiceConfigurationGoogle> lazy, Lazy<ColumbusServiceWrapper> lazyB) {
-        return new EvolutionServices(context, uiEventLogger, lazy, lazyB);
+    static EvolutionServices provideEvolutionServices(Context context, UiEventLogger uiEventLogger, Lazy<ServiceConfigurationGoogle> lazy, Lazy<ColumbusServiceWrapper> lazyB, AlarmManager am, StatusBar sb) {
+        return new EvolutionServices(context, uiEventLogger, lazy, lazyB, am, sb);
     }
 
     // Google

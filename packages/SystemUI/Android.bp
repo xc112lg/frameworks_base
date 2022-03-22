@@ -82,6 +82,7 @@ android_library {
     },
     resource_dirs: [
         "res",
+        "res-ambientmusic",
         "res-assist",
         "res-columbus",
         "res-gamedashboard",
@@ -128,6 +129,7 @@ android_library {
         "faceunlock_framework",
         "colorkt",
         "themelib",
+        "ambientmusic-google",
         "assistmanager-google",
         "backgesture-google",
         "columbus-sysui-google",
