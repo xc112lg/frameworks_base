@@ -77,6 +77,7 @@ public class PixelPropsUtils {
             "com.disney.disneyplus",
             "com.netflix.mediaclient",
             "com.nhs.online.nhsonline",
+            "com.nothing.smartcenter",
             "in.startv.hotstar"
     };
 
