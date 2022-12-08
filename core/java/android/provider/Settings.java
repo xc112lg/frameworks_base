@@ -5603,12 +5603,6 @@ public final class Settings {
         public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
         /**
-         * Double tap on lockscreen to sleep
-         * @hide
-         */
-        public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN = "double_tap_sleep_lockscreen";
-
-        /**
          * Use doubletap as doze pulse triggers
          * @hide
          */

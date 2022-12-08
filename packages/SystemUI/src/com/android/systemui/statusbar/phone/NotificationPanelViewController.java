@@ -313,8 +313,6 @@ public class NotificationPanelViewController extends PanelViewController {
             "system:" + Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN;
     private static final String DOUBLE_TAP_SLEEP_GESTURE =
             "system:" + Settings.System.DOUBLE_TAP_SLEEP_GESTURE;
-    private static final String DOUBLE_TAP_SLEEP_LOCKSCREEN =
-            "system:" + Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN;
     private static final String QS_SMART_PULLDOWN =
             "system:" + Settings.System.QS_SMART_PULLDOWN;
     private static final String RETICKER_STATUS =
@@ -566,8 +564,6 @@ public class NotificationPanelViewController extends PanelViewController {
     private int mDisplayId;
     private boolean mDoubleTapToSleepEnabled;
     private GestureDetector mDoubleTapGesture;
-
-    private boolean mIsLockscreenDoubleTapEnabled;
 
     /**
      * Cache the resource id of the theme to avoid unnecessary work in onThemeChanged.
@@ -4315,10 +4311,7 @@ public class NotificationPanelViewController extends PanelViewController {
                     return false;
                 }
 
-                if ((mIsLockscreenDoubleTapEnabled && !mPulsing && !mDozing
-                        && mBarState == StatusBarState.KEYGUARD) ||
-                        (!mQsExpanded && mDoubleTapToSleepEnabled
-                        && event.getY() < mStatusBarHeaderHeightKeyguard)) {
+                if (mDoubleTapToSleepEnabled && !mPulsing && !mDozing) {
                     mDoubleTapGesture.onTouchEvent(event);
                 }
 
@@ -5035,7 +5028,6 @@ public class NotificationPanelViewController extends PanelViewController {
             mConfigurationController.addCallback(mConfigurationListener);
             mTunerService.addTunable(this, STATUS_BAR_QUICK_QS_PULLDOWN);
             mTunerService.addTunable(this, DOUBLE_TAP_SLEEP_GESTURE);
-            mTunerService.addTunable(this, DOUBLE_TAP_SLEEP_LOCKSCREEN);
             mTunerService.addTunable(this, QS_SMART_PULLDOWN);
             mTunerService.addTunable(this, RETICKER_STATUS);
             mTunerService.addTunable(this, RETICKER_COLORED);
@@ -5068,10 +5060,6 @@ public class NotificationPanelViewController extends PanelViewController {
                     break;
                 case DOUBLE_TAP_SLEEP_GESTURE:
                     mDoubleTapToSleepEnabled =
-                            TunerService.parseIntegerSwitch(newValue, true);
-                    break;
-                case DOUBLE_TAP_SLEEP_LOCKSCREEN:
-                    mIsLockscreenDoubleTapEnabled =
                             TunerService.parseIntegerSwitch(newValue, true);
                     break;
                 case QS_SMART_PULLDOWN:
