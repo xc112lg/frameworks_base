@@ -58,7 +58,7 @@ public class PixelPropsUtils {
     private static final Map<String, Object> propsToChangeROG6;
     private static final Map<String, Object> propsToChangeXP5;
     private static final Map<String, Object> propsToChangeOP8P;
-    private static final Map<String, Object> propsToChangeOP9R;
+    private static final Map<String, Object> propsToChangeOP9P;
     private static final Map<String, Object> propsToChange11T;
     private static final Map<String, Object> propsToChangeF4;
     private static final Map<String, Object> propsToChangeK30U;
@@ -153,8 +153,8 @@ public class PixelPropsUtils {
             "com.vng.pubgmobile"
     };
 
-    // Packages to Spoof as OnePlus 9R
-    private static final String[] packagesToChangeOP9R = {
+    // Packages to Spoof as OnePlus 9 Pro
+    private static final String[] packagesToChangeOP9P = {
             "com.epicgames.fortnite",
             "com.epicgames.portal"
     };
@@ -246,9 +246,9 @@ public class PixelPropsUtils {
         propsToChangeOP8P = new HashMap<>();
         propsToChangeOP8P.put("MODEL", "IN2020");
         propsToChangeOP8P.put("MANUFACTURER", "OnePlus");
-        propsToChangeOP9R = new HashMap<>();
-        propsToChangeOP9R.put("MODEL", "LE2101");
-        propsToChangeOP9R.put("MANUFACTURER", "OnePlus");
+        propsToChangeOP9P = new HashMap<>();
+        propsToChangeOP9P.put("MODEL", "LE2123");
+        propsToChangeOP9P.put("MANUFACTURER", "OnePlus");
         propsToChange11T = new HashMap<>();
         propsToChange11T.put("MODEL", "21081111RG");
         propsToChange11T.put("MANUFACTURER", "Xiaomi");
@@ -352,9 +352,9 @@ public class PixelPropsUtils {
                     Object value = prop.getValue();
                     setPropValue(key, value);
                 }
-            } else if (Arrays.asList(packagesToChangeOP9R).contains(packageName)) {
+            } else if (Arrays.asList(packagesToChangeOP9P).contains(packageName)) {
                 dlog("Defining props for: " + packageName);
-                for (Map.Entry<String, Object> prop : propsToChangeOP9R.entrySet()) {
+                for (Map.Entry<String, Object> prop : propsToChangeOP9P.entrySet()) {
                     String key = prop.getKey();
                     Object value = prop.getValue();
                     setPropValue(key, value);
