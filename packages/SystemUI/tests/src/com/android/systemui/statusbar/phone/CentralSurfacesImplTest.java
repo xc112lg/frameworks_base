@@ -324,8 +324,7 @@ public class CentralSurfacesImplTest extends SysuiTestCase {
                 Handler.createAsync(Looper.myLooper()));
 
         mNotificationInterruptStateProvider =
-                new TestableNotificationInterruptStateProviderImpl(mContext,
-                        mContext.getContentResolver(),
+                new TestableNotificationInterruptStateProviderImpl(mContext.getContentResolver(),
                         mPowerManager,
                         mDreamManager,
                         mAmbientDisplayConfiguration,
@@ -1263,7 +1262,6 @@ public class CentralSurfacesImplTest extends SysuiTestCase {
             NotificationInterruptStateProviderImpl {
 
         TestableNotificationInterruptStateProviderImpl(
-                Context context,
                 ContentResolver contentResolver,
                 PowerManager powerManager,
                 IDreamManager dreamManager,
@@ -1278,7 +1276,6 @@ public class CentralSurfacesImplTest extends SysuiTestCase {
                 KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider,
                 UiEventLogger uiEventLogger) {
             super(
-                    context,
                     contentResolver,
                     powerManager,
                     dreamManager,

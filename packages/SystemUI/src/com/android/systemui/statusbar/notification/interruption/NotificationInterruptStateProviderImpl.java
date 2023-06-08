@@ -31,10 +31,8 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.provider.Telephony.Sms;
 import android.service.dreams.IDreamManager;
 import android.service.notification.StatusBarNotification;
-import android.telecom.TelecomManager;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -81,9 +79,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     @VisibleForTesting
     protected boolean mUseHeadsUp = false;
 
-    private boolean mLessBoringHeadsUp = false;
-    private boolean mReTicker = false;
-    private TelecomManager mTm;
     private Context mContext;
 
     public enum NotificationInterruptEvent implements UiEventLogger.UiEventEnum {
@@ -125,7 +120,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
             KeyguardNotificationVisibilityProvider keyguardNotificationVisibilityProvider,
             UiEventLogger uiEventLogger) {
         mContext = context;
-        mTm = (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE);
         mContentResolver = contentResolver;
         mPowerManager = powerManager;
         mDreamManager = dreamManager;
@@ -392,13 +386,10 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     }
 
     private boolean shouldHeadsUpWhenAwake(NotificationEntry entry, boolean log) {
+        StatusBarNotification sbn = entry.getSbn();
+
         if (!mUseHeadsUp) {
             if (log) mLogger.logNoHeadsUpFeatureDisabled();
-            return false;
-        }
-
-        if (!mReTicker && mLessBoringHeadsUp && shouldSkipHeadsUp(entry)) {
-            mLogger.logNoHeadsUpShouldSkipPackage(entry);
             return false;
         }
 
@@ -414,7 +405,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
             return false;
         }
 
-        if (isSnoozedPackage(entry)) {
+        if (isSnoozedPackage(sbn)) {
             if (log) mLogger.logNoHeadsUpPackageSnoozed(entry);
             return false;
         }
@@ -497,40 +488,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         return true;
     }
 
-    @Override
-    public void setUseLessBoringHeadsUp(boolean lessBoring) {
-        mLessBoringHeadsUp = lessBoring;
-    }
-
-    @Override
-    public void setUseReticker(boolean reTicker) {
-        mReTicker = reTicker;
-    }
-
-    public boolean shouldSkipHeadsUp(NotificationEntry entry) {
-        if (mStatusBarStateController.isDozing()) return false;
-
-        String notificationPackageName = entry.getSbn().getPackageName();
-
-        boolean isLessBoring = notificationPackageName.equals(getDefaultDialerPackage(mTm))
-                || notificationPackageName.equals(getDefaultSmsPackage(mContext))
-                || notificationPackageName.toLowerCase().contains("dialer")
-                || notificationPackageName.toLowerCase().contains("messaging")
-                || notificationPackageName.toLowerCase().contains("messenger")
-                || notificationPackageName.toLowerCase().contains("clock");
-
-        return !isLessBoring;
-    }
-
-    private static String getDefaultSmsPackage(Context ctx) {
-        // for reference, there's also a new RoleManager api with getDefaultSmsPackage(context, userid) 
-        return Sms.getDefaultSmsPackage(ctx);
-    }
-
-    private static String getDefaultDialerPackage(TelecomManager tm) {
-        return tm != null ? tm.getDefaultDialerPackage() : "";
-    }
-
     /**
      * Common checks between regular & AOD heads up and bubbles.
      *
@@ -601,8 +558,8 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         return true;
     }
 
-    private boolean isSnoozedPackage(NotificationEntry entry) {
-        return mHeadsUpManager.isSnoozed(entry.getSbn().getPackageName());
+    private boolean isSnoozedPackage(StatusBarNotification sbn) {
+        return mHeadsUpManager.isSnoozed(sbn.getPackageName());
     }
 
     private boolean shouldSuppressHeadsUpWhenAwakeForOldWhen(NotificationEntry entry, boolean log) {

@@ -5818,13 +5818,6 @@ public final class Settings {
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";
 
         /**
-         * Whether to show the kill app button in notification guts
-         * @hide
-         */
-        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
-                "notification_guts_kill_app_button";
-
-        /**
          * Whether to wake the display when plugging or unplugging the charger
          * @hide
          */
@@ -6619,12 +6612,6 @@ public final class Settings {
                 "button_backlight_only_when_pressed";
 
         /**
-         * Whether to show heads up only for dialer and sms apps
-         * @hide
-         */
-        public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
-
-        /**
          * Which notification Vibration Pattern to use
          * 0: default provided value
          * 1: dzzz-da
@@ -6887,24 +6874,6 @@ public final class Settings {
          * @hide
          */
         public static final String LS_MEDIA_ARTWORK_FADE_PERCENT = "ls_media_artwork_fade_percent";
-
-        /**
-         * Whether to enable artwork blur
-         * @hide
-         */
-        public static final String MEDIA_ARTWORK_BLUR_ENABLED = "media_artwork_blur_enabled";
-
-        /**
-         * Adjust blur radius for background media
-         * @hide
-         */
-        public static final String MEDIA_ARTWORK_BLUR_RADIUS = "media_artwork_blur_radius";
-
-        /**
-         * Adjust fade percent for background media
-         * @hide
-         */
-        public static final String MEDIA_ARTWORK_FADE_PERCENT = "media_artwork_fade_percent";
 
         /**
          * Whether to show material Dismiss All Button for notifications

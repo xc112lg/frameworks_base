@@ -117,7 +117,5 @@ public class SystemSettings {
         Settings.System.NAVIGATION_BAR_IME_SPACE,
         Settings.System.STATUS_BAR_NOTIF_COUNT,
         Settings.System.QS_PANEL_STYLE,
-        Settings.System.MEDIA_ARTWORK_BLUR_ENABLED,
-        Settings.System.MEDIA_ARTWORK_BLUR_RADIUS,
     };
 }
