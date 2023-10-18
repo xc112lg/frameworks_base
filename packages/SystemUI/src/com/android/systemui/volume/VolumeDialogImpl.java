@@ -35,7 +35,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import static com.android.internal.jank.InteractionJankMonitor.CUJ_VOLUME_CONTROL;
 import static com.android.internal.jank.InteractionJankMonitor.Configuration.Builder;
-import static com.android.systemui.volume.Events.DISMISS_REASON_POSTURE_CHANGED;
 import static com.android.systemui.volume.Events.DISMISS_REASON_SETTINGS_CLICKED;
 
 import android.animation.Animator;
@@ -134,7 +133,6 @@ import com.android.systemui.plugins.VolumeDialogController.State;
 import com.android.systemui.plugins.VolumeDialogController.StreamState;
 import com.android.systemui.statusbar.policy.AccessibilityManagerWrapper;
 import com.android.systemui.statusbar.policy.ConfigurationController;
-import com.android.systemui.statusbar.policy.DevicePostureController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.util.AlphaTintDrawableWrapper;
 import com.android.systemui.util.RoundedCornerProgressDrawable;
@@ -297,12 +295,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
     final int mVolumeRingerIconDrawableId = R.drawable.ic_speaker_on;
     @VisibleForTesting
     final int mVolumeRingerMuteIconDrawableId = R.drawable.ic_speaker_mute;
-
     private int mOriginalGravity;
-    private final DevicePostureController.Callback mDevicePostureControllerCallback;
-    private final DevicePostureController mDevicePostureController;
-    private @DevicePostureController.DevicePostureInt int mDevicePosture;
-    private int mOrientation;
 
     // Variable to track the default row with which the panel is initially shown
     private VolumeRow mDefaultRow = null;
@@ -320,12 +313,11 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
             ActivityStarter activityStarter,
             InteractionJankMonitor interactionJankMonitor,
             CsdWarningDialog.Factory csdWarningDialogFactory,
-            DevicePostureController devicePostureController,
             Looper looper,
             DumpManager dumpManager) {
+        mHandler = new H(looper);
         mContext =
                 new ContextThemeWrapper(context, R.style.volume_dialog_theme);
-        mHandler = new H(looper);
         mController = volumeDialogController;
         mKeyguard = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
         mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
@@ -369,35 +361,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mCustomSettingsObserver.observe();
 
         initDimens();
-
-        mOrientation = mContext.getResources().getConfiguration().orientation;
-        mDevicePostureController = devicePostureController;
-        if (mDevicePostureController != null) {
-            int initialPosture = mDevicePostureController.getDevicePosture();
-            mDevicePosture = initialPosture;
-            mDevicePostureControllerCallback = this::onPostureChanged;
-        } else {
-            mDevicePostureControllerCallback = null;
-        }
-    }
-
-    /**
-     * Adjust the dialog location on the screen in order to avoid drawing on the hinge.
-     */
-    private void adjustPositionOnScreen() {
-        final boolean isPortrait = mOrientation == Configuration.ORIENTATION_PORTRAIT;
-        final boolean isHalfOpen =
-                mDevicePosture == DevicePostureController.DEVICE_POSTURE_HALF_OPENED;
-        final boolean isTabletop = isPortrait && isHalfOpen;
-        WindowManager.LayoutParams lp =  mWindow.getAttributes();
-        int gravity = isTabletop ? (mOriginalGravity | Gravity.TOP) : mOriginalGravity;
-        mWindowGravity = Gravity.getAbsoluteGravity(gravity,
-                mContext.getResources().getConfiguration().getLayoutDirection());
-        lp.gravity = mWindowGravity;
-    }
-
-    @VisibleForTesting int getWindowGravity() {
-        return mWindowGravity;
     }
 
     @Override
@@ -412,10 +375,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mController.getState();
 
         mConfigurationController.addCallback(this);
-
-        if (mDevicePostureController != null) {
-            mDevicePostureController.addCallback(mDevicePostureControllerCallback);
-        }
     }
 
     @Override
@@ -424,9 +383,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mController.removeCallback(mControllerCallbackH);
         mHandler.removeCallbacksAndMessages(null);
         mConfigurationController.removeCallback(this);
-        if (mDevicePostureController != null) {
-            mDevicePostureController.removeCallback(mDevicePostureControllerCallback);
-        }
         mCustomSettingsObserver.stop();
     }
 
@@ -518,9 +474,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         lp.windowAnimations = -1;
 
         mOriginalGravity = mContext.getResources().getInteger(R.integer.volume_dialog_gravity);
-        mWindowGravity = Gravity.getAbsoluteGravity(mOriginalGravity,
-                mContext.getResources().getConfiguration().getLayoutDirection());
-        lp.gravity = mWindowGravity;
+        lp.gravity = mOriginalGravity;
         if (!mShowActiveStreamOnly) {
             lp.gravity &= ~(Gravity.LEFT | Gravity.RIGHT);
             lp.gravity |= mVolumePanelOnLeft ? Gravity.LEFT : Gravity.RIGHT;
@@ -737,10 +691,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         initSettingsH(lockTaskModeState);
         initODICaptionsH();
         mAccessibility.init();
-    }
-
-    private boolean isWindowGravityLeft() {
-        return (mWindowGravity & Gravity.LEFT) == Gravity.LEFT;
     }
 
     private void initDimens() {
@@ -2336,11 +2286,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mTopContainer.setBackground(background);
     }
 
-    @Override
-    public void onConfigChanged(Configuration config) {
-        mOrientation = config.orientation;
-    }
-
     private final VolumeDialogController.Callbacks mControllerCallbackH
             = new VolumeDialogController.Callbacks() {
         @Override
@@ -2417,11 +2362,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         }
     };
 
-    @VisibleForTesting void onPostureChanged(int posture) {
-        dismiss(DISMISS_REASON_POSTURE_CHANGED);
-        mDevicePosture = posture;
-    }
-
     private final class H extends Handler {
         private static final int SHOW = 1;
         private static final int DISMISS = 2;
@@ -2479,7 +2419,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         protected void onStart() {
             super.setCanceledOnTouchOutside(true);
             super.onStart();
-            adjustPositionOnScreen();
         }
 
         @Override
