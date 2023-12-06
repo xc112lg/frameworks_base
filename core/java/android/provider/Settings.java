@@ -6401,12 +6401,6 @@ public final class Settings {
         public static final String QS_TILE_LABEL_SIZE = "qs_tile_label_size";
 
         /**
-         * Whether to enable the ripple animation on fingerprint unlock
-         * @hide
-         */
-        public static final String ENABLE_RIPPLE_EFFECT = "enable_ripple_effect";
-
-        /**
          * Whether to enable or disable vibration on succesful fingerprint auth
          * @hide
          */
