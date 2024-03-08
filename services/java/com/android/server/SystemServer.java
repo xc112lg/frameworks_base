@@ -234,7 +234,6 @@ import com.android.server.webkit.WebViewUpdateService;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
-import com.android.server.custom.health.HealthInterfaceService;
 
 import dalvik.system.VMRuntime;
 
@@ -253,11 +252,6 @@ import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
-// LineageHardware
-import com.android.server.custom.LineageHardwareService;
-
-// LiveDisplay
-import com.android.server.custom.display.LiveDisplayService;
 
 /**
  * Entry point to {@code system_server}.
