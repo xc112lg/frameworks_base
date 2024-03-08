@@ -26,7 +26,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.android.internal.custom.hardware.LineageHardwareManager;
+import lineageos.hardware.LineageHardwareManager;
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.R;
 import com.android.systemui.dagger.qualifiers.Background;
