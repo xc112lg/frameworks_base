@@ -31,7 +31,7 @@ public class FingerprintInteractiveToAuthProviderImpl implements
     public FingerprintInteractiveToAuthProviderImpl(Context context) {
         mContext = context;
         mDefaultValue = context.getResources().getBoolean(
-                com.android.internal.R.bool.config_fingerprintWakeAndUnlock) ? 1 : 0;
+                org.lineageos.platform.internal.R.bool.config_fingerprintWakeAndUnlock) ? 1 : 0;
     }
 
     public boolean isEnabled(int userId) {

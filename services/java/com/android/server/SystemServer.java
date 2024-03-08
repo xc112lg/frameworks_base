@@ -234,6 +234,7 @@ import com.android.server.webkit.WebViewUpdateService;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+import com.android.server.custom.health.HealthInterfaceService;
 
 import dalvik.system.VMRuntime;
 
@@ -251,7 +252,6 @@ import java.util.Timer;
 import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
-
 
 /**
  * Entry point to {@code system_server}.
@@ -2815,6 +2815,26 @@ public final class SystemServer implements Dumpable {
         t.traceBegin("startTracingServiceProxy");
         mSystemServiceManager.startService(TracingServiceProxy.class);
         t.traceEnd();
+
+        // Lineage Services
+        String externalServer = context.getResources().getString(
+                org.lineageos.platform.internal.R.string.config_externalSystemServer);
+        final Class<?> serverClazz;
+        try {
+            serverClazz = Class.forName(externalServer);
+            final Constructor<?> constructor = serverClazz.getDeclaredConstructor(Context.class);
+            constructor.setAccessible(true);
+            final Object baseObject = constructor.newInstance(mSystemContext);
+            final Method method = baseObject.getClass().getDeclaredMethod("run");
+            method.setAccessible(true);
+            method.invoke(baseObject);
+        } catch (ClassNotFoundException
+                | IllegalAccessException
+                | InvocationTargetException
+                | InstantiationException
+                | NoSuchMethodException e) {
+            reportWtf("Making " + externalServer + " ready", e);
+        }
 
         // It is now time to start up the app processes...
 
