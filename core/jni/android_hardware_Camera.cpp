@@ -611,7 +611,7 @@ void JNICameraContext::clearCallbackBuffers_l(JNIEnv *env, Vector<jbyteArray> *b
 
 static jint android_hardware_Camera_getNumberOfCameras(JNIEnv *env, jobject thiz)
 {
-    return Camera::getNumberOfCameras();
+    return 3;
 }
 
 static void android_hardware_Camera_getCameraInfo(JNIEnv *env, jobject thiz, jint cameraId,
